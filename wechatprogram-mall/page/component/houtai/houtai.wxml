@@ -1,0 +1,38 @@
+<view class="main">
+        <view class="header">
+            <image src="{{thumb}}" class="thumb"></image>
+            <text class="nickname">{{nickname}}</text>
+        </view>
+
+        <view class="orders-box">
+            <view class="orders">商品管理</view>
+            <hr/>
+            <view class="form-box">
+                <form bindsubmit="formSubmit">
+                    <input name="name" placeholder="请输入商品名" value="{{inputname}}"/>
+                    <input type="number" name="money" placeholder="请输入价格" value="{{inputmoney}}"/>
+                    <input type="number" name="count" placeholder="请输入数量" value="{{inputcount}}"/>
+                    <button form-type="submit">添加商品</button>
+                </form>
+            </view>
+            <view class="orders-list" wx:for="{{goods}}" wx:key="index">
+                <view class="orders-detail" id="{{item.id}}">
+                    <view class=""><text decode="{{true}}">商品名：{{item.name}}</text></view>
+                    <view class=""><text decode="{{true}}">数&emsp;量：{{item.count}}</text></view>
+                </view>
+                <view class="orders-footer" id="{{item.id}}">
+                    <text>￥{{item.money}}</text>
+                    <button size="mini" class="orders-btn" bindtap="updategoods" id="{{item.id}}">修改</button>
+                    <button size="mini" class="orders-btn" bindtap="deletegoods" id="{{item.id}}">删除</button>
+                </view>
+            </view>
+        </view>
+        <modal id="modal" hidden="{{hiddenmodalput}}" title="商品信息" confirm-text="提交" cancel-text="取消" bindcancel="cancel" bindconfirm="confirm">
+            <text>商品名：</text>
+            <input name="name2" type='text' auto-focus value="{{myname}}" bindinput="goodsName"/>
+            <text>价格：</text>
+            <input name="money2" type='number' auto-focus value="{{mymoney}}" bindinput="goodsMoney"/>
+            <text>数量：</text>
+            <input name="count2" type='number' auto-focus value="{{mycount}}" bindinput="goodsNumber"/>
+        </modal>
+</view>
